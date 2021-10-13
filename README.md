@@ -2,9 +2,10 @@ GRA Gran Robo Automotor
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Martín Zino
+- Facundo Soria
+- Nicolas Aparicio
+- Pedro De Aguirre
 
 ## Capturas
 
