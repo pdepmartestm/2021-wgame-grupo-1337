@@ -1,4 +1,4 @@
-# Nombre del juego (<- borrar y completar)
+GRA Gran Robo Automotor
 
 ## Equipo de desarrollo
 
@@ -12,7 +12,7 @@
 
 ## Reglas de Juego / Instrucciones
 
-(Escribirlas)
+Se trata de un juego inspirado en el mitico GTA de la también mítica game boy advance. En el cual el personaje principal maneja un vehiculo (con la camara en vista superior) y debe ir esquivando otros vehiculos y recogiendo items de utilidad tales como dólares, armas y municion. El juego finaliza cuando el auto alcanza determinada cantidad de choques
 
 
 ## Otros
