@@ -7,7 +7,7 @@ program juego {
 	game.ground("calle.png")
 	game.height(9)
 	game.width(6)
-	var autoJugador = new AutoJugador(vida = 100, image = "pepita.png", position = game.at(0, 0))
+	var autoJugador = new AutoJugador(vida = 100, image = "autoderecho.jpeg", position = game.at(0, 0))
 	game.addVisualCharacter(autoJugador)
 	game.start()
 }
