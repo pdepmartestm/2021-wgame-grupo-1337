@@ -11,5 +11,8 @@ class Entidad {
 		if(ultimoFrame == cantidadFrame) ultimoFrame = 0
 		image =  animacion.get(ultimoFrame)
 	}
+	method image() {
+		return image
+	}
 	
 }

@@ -1,9 +1,13 @@
 import wollok.game.*
-
+import AutoJugador.*
 program juego {
+	
 	game.title("GRA: Gran Robo Automotor")
 	game.cellSize(100)
+	game.ground("calle.png")
 	game.height(9)
 	game.width(6)
+	var autoJugador = new AutoJugador(vida = 100, image = "pepita.png", position = game.at(0, 0))
+	game.addVisualCharacter(autoJugador)
 	game.start()
 }
