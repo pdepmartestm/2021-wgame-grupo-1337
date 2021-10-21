@@ -1,13 +1,12 @@
 import wollok.game.*
-import Auto.*
-class AutoJugador inherits Auto{
+import Entidad.*
+class AutoJugador inherits Entidad{
 	
-	var property vida
+	var property vida = 100
+	var property puntos = 0
+	var property plata = 0
 	
-	method moverseDerecha(){ 
-		position = position.right(1) 
-	} 
-	method moverseIzquierda(){ 
-		position = position.left(1) 
+	method enderezar(){
+		game.schedule(1 * 1000, {self.image("Auto_Derecho.png")})
 	}
 }
