@@ -42,7 +42,7 @@ program juego {
 		game.onTick(1000, "AGARRAR", {
 			if(autoJugador.position() == b.position()) b.modificar(autoJugador)
 		})
-		game.schedule(9 * 1000, {
+		game.schedule(10 * 1000, {
 			game.removeTickEvent("CAIDAS")
 			game.removeVisual(b)
 		})

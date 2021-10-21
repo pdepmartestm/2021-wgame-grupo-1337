@@ -21,7 +21,7 @@ class Entidad {
 	}
 	method irCayendo(){
 		game.onTick(1000, "CAIDAS", {
-			position = game.at(position.x(), (0).max(position.y() - 1))
+			position = game.at(position.x(), (-1).max(position.y() - 1))
 		})
 		
 		
