@@ -29,13 +29,14 @@ program juego {
 	game.onTick(4 * 1000, "GENERAR", {
 		const random = (1..6).anyOne()
 		const horizontal = (0..5).anyOne()
+		const posicionSpawn = game.at(horizontal,8)
 		var b
-		if(random == 1) b = new Bate(position = game.at(horizontal,8))
-		if(random == 2) b = new Espada(position = game.at(horizontal,8))
-		if(random == 3) b = new Pistola(position = game.at(horizontal,8))
-		if(random == 4) b = new Ametralladora(position = game.at(horizontal,8))
-		if(random == 5) b = new Llave(position = game.at(horizontal,8))
-		if(random == 6) b = new Dinero(position = game.at(horizontal,8))
+		if(random == 1) b = new Bate(position = posicionSpawn)
+		if(random == 2) b = new Espada(position = posicionSpawn)
+		if(random == 3) b = new Pistola(position = posicionSpawn)
+		if(random == 4) b = new Ametralladora(position = posicionSpawn)
+		if(random == 5) b = new Llave(position = posicionSpawn)
+		if(random == 6) b = new Dinero(position = posicionSpawn)
 		
 		game.addVisual(b)
 		b.irCayendo()
