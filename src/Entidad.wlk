@@ -1,4 +1,5 @@
 import wollok.game.*
+import Pantalla.*
 class Entidad {
 	
 	var property image = ""
@@ -20,10 +21,14 @@ class Entidad {
 		position = nuevaPosicion
 	}
 	method irCayendo(){
-		game.onTick(1000, "CAIDAS", {
+		game.onTick(pantalla.velocidad(), "CAIDAS", {
 			position = game.at(position.x(), (-1).max(position.y() - 1))
+			if(self.position().y() < 0){
+				game.removeTickEvent("CAIDAS")
+				game.removeVisual(self)
+			}
 		})
-		
+	
 		
 	}
 	
