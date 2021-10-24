@@ -4,6 +4,7 @@ import Calle.*
 import Arma.*
 import Llave.*
 import Dinero.*
+import Auto.*
 
 object pantalla{
 	
@@ -43,7 +44,7 @@ object pantalla{
 			autoJugador.enderezar()
 		}
 		
-		game.onTick(4 * 1000, "GENERAR", {
+		game.onTick(5 * 1000, "GENERAR", {
 			const random = (1..6).anyOne()
 			const horizontal = (0..5).anyOne()
 			const posicionSpawn = game.at(horizontal,8)
@@ -61,8 +62,35 @@ object pantalla{
 				if(autoJugador.position() == b.position()) b.modificar(autoJugador)
 			})
 		})
+		game.onTick(1500, "GENERAR AUTOS", {
+			const random = (1..2).anyOne()
+			const horizontal = (0..5).anyOne()
+			const posicionSpawn = game.at(horizontal,8)
+			var b
+			if(random == 1) b = new Auto1(position = posicionSpawn)
+			if(random == 2) b = new Auto2(position = posicionSpawn)
+			
+			game.addVisual(b)
+			b.irCayendo()
+			game.onTick(1000, "CHOCAR", {
+				if(autoJugador.position() == b.position()) b.modificar(autoJugador)
+				if(autoJugador.vida() <= 0) self.detener(autoJugador)
+			})
+		})
 
 		game.start()
+	}
+	method detener(jugador){
+		jugador.image("explosion.png")
+		game.removeTickEvent("CHOCAR")
+		game.removeTickEvent("GENERAR AUTOS")
+		game.removeTickEvent("GENERAR")
+		game.removeTickEvent("Animacion Fondo")
+		game.say(jugador, "PERDISTE")
+		game.schedule(2000, {
+			game.stop()
+		})
+		
 	}
 
 	
