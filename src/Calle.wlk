@@ -17,5 +17,10 @@ object calle{
 	method animacion(){
 		game.onTick(velocidadCalle, "Animacion Fondo", {nro = (nro % 2) + 1 })
 	}
+	
+	method colision(auto) {
+		//No hará nada. Solamente tenemos el objeto calle para poder mostrar la animación del fondo
+		//correctamente.
+	}
 
 }

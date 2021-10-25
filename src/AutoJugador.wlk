@@ -9,4 +9,7 @@ class AutoJugador inherits Entidad{
 	method enderezar(){
 		game.schedule(1 * 1000, {self.image("Auto_Derecho.png")})
 	}
+	override method colision(autoJugador){
+		//No deberia colisionar consigo mismo asi que se deja sin funcionalidad
+	}
 }

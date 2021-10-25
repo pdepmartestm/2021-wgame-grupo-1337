@@ -5,7 +5,7 @@ class Llave inherits Entidad{
 	
 	override method image() = "llave inglesa.png"
 	
-	method modificar(auto){
+	override method colision(auto){
 		auto.vida(auto.vida() + reparacion)
 	}
 }

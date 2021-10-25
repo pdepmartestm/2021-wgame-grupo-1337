@@ -7,7 +7,10 @@ class Dinero inherits Entidad{
 	override method image() = "dinero.png"
 	
 	method modificar(auto){
-		auto.puntos(auto.puntos() + 20)
-		auto.plata(auto.plata() + dineroCantidad)
+	}
+	
+	override method colision(autoJugador){
+		autoJugador.puntos(autoJugador.puntos() + 20)
+		autoJugador.plata(autoJugador.plata() + dineroCantidad)
 	}
 }

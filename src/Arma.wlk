@@ -8,8 +8,8 @@ import wollok.game.*
 class Arma inherits Entidad{
 	var property sprite = []
 	method puntaje()
-	method modificar(auto){
-		auto.puntos(auto.puntos() + self.puntaje())
+	override method colision(autoJugador){
+		autoJugador.puntos(autoJugador.puntos() + self.puntaje())
 	}
 	
 }

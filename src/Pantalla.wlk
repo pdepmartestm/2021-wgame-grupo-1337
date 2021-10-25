@@ -4,6 +4,8 @@ import Calle.*
 import Arma.*
 import Llave.*
 import Dinero.*
+import AutoEnemigo.*
+
 
 object pantalla{
 	
@@ -29,20 +31,28 @@ object pantalla{
 			calle.animacion()
 		}
 	
-		var autoJugador = new AutoJugador(vida = 100, image = "Auto_Derecho.png", position = game.at(0, 0))
+		var autoJugador = new AutoJugador(vida = 100, image = "Auto_Derecho.png", position = game.at(2, 0))
 		game.addVisual(autoJugador)
 		game.showAttributes(autoJugador)
 		keyboard.left().onPressDo { 
-			autoJugador.move(autoJugador.position().left(1))
-			autoJugador.image("Auto_Izquierda.png")
-			autoJugador.enderezar()
+			if(autoJugador.position().x()==0){//no hacer nada ya que se pasa de la pantalla
+			}
+			else{
+				autoJugador.move(autoJugador.position().left(1))
+				autoJugador.image("Auto_Izquierda.png")
+				autoJugador.enderezar()
+			}
 		}
 		keyboard.right().onPressDo { 
-			autoJugador.move(autoJugador.position().right(1))
-			autoJugador.image("Auto_Derecha.png")
-			autoJugador.enderezar()
+			if(autoJugador.position().x()>4){//no hacer nada ya que se pasa de la pantalla
+			}
+			else{
+				autoJugador.move(autoJugador.position().right(1))
+				autoJugador.image("Auto_Derecha.png")
+				autoJugador.enderezar()
+			}
 		}
-		
+		//Spawn de items
 		game.onTick(4 * 1000, "GENERAR", {
 			const random = (1..6).anyOne()
 			const horizontal = (0..5).anyOne()
@@ -54,13 +64,24 @@ object pantalla{
 			if(random == 4) b = new Ametralladora(position = posicionSpawn)
 			if(random == 5) b = new Llave(position = posicionSpawn)
 			if(random == 6) b = new Dinero(position = posicionSpawn)
-			
 			game.addVisual(b)
 			b.irCayendo()	
-			game.onTick(1000, "AGARRAR", {
-				if(autoJugador.position() == b.position()) b.modificar(autoJugador)
-			})
 		})
+		
+		//Spawn de enemigos
+		game.onTick(2 * 1000, "SPAWN_ENEMIGO", {
+			const horizontal = (0..5).anyOne()
+			const posicionSpawn = game.at(horizontal,8)
+			var b = new AutoEnemigo(danio = (25..40).anyOne(), position = posicionSpawn)
+			game.addVisual(b)
+			b.irCayendo()	
+		})
+		
+		//Manejo de colision con el auto
+		game.onCollideDo(autoJugador, {
+			entidad => entidad.colision(autoJugador)
+		})
+		
 
 		game.start()
 	}
