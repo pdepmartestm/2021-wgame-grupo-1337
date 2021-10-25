@@ -8,10 +8,15 @@ class AutoEnemigo inherits Entidad{
 	override method image() ="enemigo_Derecho.png"
 	override method colision(jugador){
 		jugador.vida(jugador.vida()-danio)
-		
 		if(jugador.vida()<0){
-			//Manejar fin del juego evento
-			game.removeVisual(jugador)
+			jugador.image("explosion.png")
+			game.removeTickEvent("SPAWN_ENEMIGO")
+			game.removeTickEvent("GENERAR")
+			game.removeTickEvent("Animacion Fondo")
+			game.say(jugador, "PERDISTE")
+			game.schedule(1000, {
+				game.stop()
+			})
 		}
 	}
 	

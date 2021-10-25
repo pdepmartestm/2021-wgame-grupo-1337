@@ -6,7 +6,6 @@ import Llave.*
 import Dinero.*
 import AutoEnemigo.*
 
-
 object pantalla{
 	
 	var property velocidad = 100
@@ -67,9 +66,8 @@ object pantalla{
 			game.addVisual(b)
 			b.irCayendo()	
 		})
-		
 		//Spawn de enemigos
-		game.onTick(2 * 1000, "SPAWN_ENEMIGO", {
+		game.onTick(1500, "SPAWN_ENEMIGO", {
 			const horizontal = (0..5).anyOne()
 			const posicionSpawn = game.at(horizontal,8)
 			var b = new AutoEnemigo(danio = (25..40).anyOne(), position = posicionSpawn)
@@ -81,11 +79,8 @@ object pantalla{
 		game.onCollideDo(autoJugador, {
 			entidad => entidad.colision(autoJugador)
 		})
-		
 
 		game.start()
 	}
-
-	
 }
 

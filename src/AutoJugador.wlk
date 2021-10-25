@@ -12,4 +12,5 @@ class AutoJugador inherits Entidad{
 	override method colision(autoJugador){
 		//No deberia colisionar consigo mismo asi que se deja sin funcionalidad
 	}
+	
 }
