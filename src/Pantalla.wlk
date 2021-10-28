@@ -20,17 +20,16 @@ object pantalla{
 		calle.animacion()
 		
 		keyboard.up().onPressDo {
-			velocidad = velocidad - 20
-			game.removeTickEvent("Animacion Fondo")
-			calle.animacion()
+			velocidad = velocidad - 10
+			self.nuevaVelocidadAnimacion()
 		}
 		keyboard.down().onPressDo {
-			velocidad = velocidad + 20
-			game.removeTickEvent("Animacion Fondo")
-			calle.animacion()
+			velocidad = velocidad + 10
+			self.nuevaVelocidadAnimacion()
 		}
+		
 	
-		var autoJugador = new AutoJugador(vida = 100, image = "Auto_Derecho.png", position = game.at(2, 0))
+		var autoJugador = new AutoJugador(vida = 100, image = "Auto_Derecho.png", position = game.at(3, 0))
 		game.addVisual(autoJugador)
 		game.showAttributes(autoJugador)
 		keyboard.left().onPressDo { 
@@ -78,9 +77,18 @@ object pantalla{
 		//Manejo de colision con el auto
 		game.onCollideDo(autoJugador, {
 			entidad => entidad.colision(autoJugador)
+						game.removeVisual(entidad)
 		})
-
+		
 		game.start()
 	}
+	
+	method nuevaVelocidadAnimacion(){
+		game.removeTickEvent("Animacion Fondo")
+		calle.velocidadCalle(velocidad)
+		calle.animacion()
+	}
+	
+
 }
 

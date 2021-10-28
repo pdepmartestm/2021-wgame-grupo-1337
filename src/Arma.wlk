@@ -15,21 +15,21 @@ class Arma inherits Entidad{
 }
 
 class Bate inherits Arma {
-	override method puntaje() = 50
+	override method puntaje() = 10
 	override method image() = "bate.png"
 }
 
 class Espada inherits Arma {
-	override method puntaje() = 100
+	override method puntaje() = 20
 	override method image() = "espada.png"
 }
 
 class Pistola inherits Arma {
-	override method puntaje() = 200
+	override method puntaje() = 50
 	override method image() = "pistola.png"
 }
 
 class Ametralladora inherits Arma {
-	override method puntaje() = 500
+	override method puntaje() = 100
 	override method image() = "ametralladora.png"
 }
