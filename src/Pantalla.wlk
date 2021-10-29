@@ -5,6 +5,7 @@ import Arma.*
 import Llave.*
 import Dinero.*
 import AutoEnemigo.*
+import Vida.*
 
 object pantalla{
 	
@@ -16,6 +17,8 @@ object pantalla{
 		game.boardGround("Calle1.png")
 		game.height(9)
 		game.width(6)
+		const musicaFondo = game.sound("musicaFondo.mp3")
+		game.schedule(100, {musicaFondo.play()})
 		game.addVisual(calle)
 		calle.animacion()
 		
@@ -28,28 +31,6 @@ object pantalla{
 			self.nuevaVelocidadAnimacion()
 		}
 		
-	
-		var autoJugador = new AutoJugador(vida = 100, image = "Auto_Derecho.png", position = game.at(3, 0))
-		game.addVisual(autoJugador)
-		game.showAttributes(autoJugador)
-		keyboard.left().onPressDo { 
-			if(autoJugador.position().x()==0){//no hacer nada ya que se pasa de la pantalla
-			}
-			else{
-				autoJugador.move(autoJugador.position().left(1))
-				autoJugador.image("Auto_Izquierda.png")
-				autoJugador.enderezar()
-			}
-		}
-		keyboard.right().onPressDo { 
-			if(autoJugador.position().x()>4){//no hacer nada ya que se pasa de la pantalla
-			}
-			else{
-				autoJugador.move(autoJugador.position().right(1))
-				autoJugador.image("Auto_Derecha.png")
-				autoJugador.enderezar()
-			}
-		}
 		//Spawn de items
 		game.onTick(4 * 1000, "GENERAR", {
 			const random = (1..6).anyOne()
@@ -69,17 +50,40 @@ object pantalla{
 		game.onTick(1500, "SPAWN_ENEMIGO", {
 			const horizontal = (0..5).anyOne()
 			const posicionSpawn = game.at(horizontal,8)
-			var b = new AutoEnemigo(danio = (25..40).anyOne(), position = posicionSpawn)
+			var b = new AutoEnemigo(danio = [1, 2].anyOne(), position = posicionSpawn)
 			game.addVisual(b)
 			b.irCayendo()	
 		})
 		
+		//Auto del jugador
+		game.addVisual(autoJugador)
+		keyboard.left().onPressDo { 
+			if(autoJugador.position().x()==0){//no hacer nada ya que se pasa de la pantalla
+			}
+			else{
+				autoJugador.move(autoJugador.position().left(1))
+				autoJugador.image("Auto_Izquierda.png")
+				autoJugador.enderezar()
+			}
+		}
+		keyboard.right().onPressDo { 
+			if(autoJugador.position().x()>4){//no hacer nada ya que se pasa de la pantalla
+			}
+			else{
+				autoJugador.move(autoJugador.position().right(1))
+				autoJugador.image("Auto_Derecha.png")
+				autoJugador.enderezar()
+			}
+		}
+		
 		//Manejo de colision con el auto
 		game.onCollideDo(autoJugador, {
 			entidad => entidad.colision(autoJugador)
-						game.removeVisual(entidad)
 		})
 		
+		
+		
+		game.addVisual(vida)
 		game.start()
 	}
 	

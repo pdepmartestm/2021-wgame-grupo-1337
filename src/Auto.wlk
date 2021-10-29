@@ -3,7 +3,7 @@ import Entidad.*
 
 class Auto inherits Entidad{
 	method modificar(auto){
-		auto.vida(auto.vida() - 50)
+		auto.vida(auto.vida() - 1)
 	}
 }
 

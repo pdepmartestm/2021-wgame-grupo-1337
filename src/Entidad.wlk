@@ -5,9 +5,7 @@ class Entidad {
 	var property image = ""
 	var property position
 	
-	method move(nuevaPosicion) {
-		position = nuevaPosicion
-	}
+	
 	method irCayendo(){
 		game.onTick(pantalla.velocidad(), "CAIDAS", {
 			position = game.at(position.x(), (-1).max(position.y() - 1))
