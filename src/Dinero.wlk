@@ -1,5 +1,6 @@
 //Clase para manejar la fabricacion y obtencion de bundles de billetes
 import Entidad.*
+import sonidoItem.*
 class Dinero inherits Entidad{
 	
 	var property dineroCantidad = 10
@@ -12,5 +13,6 @@ class Dinero inherits Entidad{
 	override method colision(autoJugador){
 		autoJugador.puntos(autoJugador.puntos() + 20)
 		autoJugador.plata(autoJugador.plata() + dineroCantidad)
+		sonidoItem.playItem()
 	}
 }

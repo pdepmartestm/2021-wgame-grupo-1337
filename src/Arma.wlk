@@ -1,5 +1,6 @@
 import Entidad.*
 import wollok.game.*
+import sonidoItem.*
 
 //Bate: 50 puntos
 //Espada: 100 puntos
@@ -10,6 +11,7 @@ class Arma inherits Entidad{
 	method puntaje()
 	override method colision(autoJugador){
 		autoJugador.puntos(autoJugador.puntos() + self.puntaje())
+		sonidoItem.playItem()
 	}
 	
 }

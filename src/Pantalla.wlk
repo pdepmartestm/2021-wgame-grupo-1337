@@ -6,6 +6,8 @@ import Llave.*
 import Dinero.*
 import AutoEnemigo.*
 import Vida.*
+import Puntaje.*
+import timer.*
 
 object pantalla{
 	
@@ -17,8 +19,11 @@ object pantalla{
 		game.boardGround("Calle1.png")
 		game.height(9)
 		game.width(6)
+		//Musica de fondo
 		const musicaFondo = game.sound("musicaFondo.mp3")
+		musicaFondo.shouldLoop(true)
 		game.schedule(100, {musicaFondo.play()})
+		//Setup calle
 		game.addVisual(calle)
 		calle.animacion()
 		
@@ -32,7 +37,7 @@ object pantalla{
 		}
 		
 		//Spawn de items
-		game.onTick(4 * 1000, "GENERAR", {
+		game.onTick(4000, "GENERAR", {
 			const random = (1..6).anyOne()
 			const horizontal = (0..5).anyOne()
 			const posicionSpawn = game.at(horizontal,8)
@@ -50,7 +55,8 @@ object pantalla{
 		game.onTick(1500, "SPAWN_ENEMIGO", {
 			const horizontal = (0..5).anyOne()
 			const posicionSpawn = game.at(horizontal,8)
-			var b = new AutoEnemigo(danio = [1, 2].anyOne(), position = posicionSpawn)
+			const danio_imagen = [1, 2].anyOne()
+			const b = new AutoEnemigo(danio = danio_imagen, position = posicionSpawn, number = danio_imagen - 1)
 			game.addVisual(b)
 			b.irCayendo()	
 		})
@@ -81,8 +87,12 @@ object pantalla{
 			entidad => entidad.colision(autoJugador)
 		})
 		
-		
-		
+		//visual de puntaje del auto
+		game.addVisual(puntaje)
+		//visual temporizador
+		game.addVisual(timer)
+		timer.cuentaRegresiva()
+		//Visual de la vida
 		game.addVisual(vida)
 		game.start()
 	}
@@ -91,6 +101,19 @@ object pantalla{
 		game.removeTickEvent("Animacion Fondo")
 		calle.velocidadCalle(velocidad)
 		calle.animacion()
+	}
+	
+	method terminarPartida(imagenFinalizacion, color){
+		game.clear()
+		game.schedule(4000, {
+			game.stop()
+		})
+		game.addVisual(object { 
+			var property position = game.at(0, 0)
+			method image() = imagenFinalizacion
+		})
+		puntaje.color(color)
+		game.addVisual(puntaje)
 	}
 	
 

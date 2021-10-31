@@ -6,21 +6,21 @@ class AutoEnemigo inherits Entidad{
 	//Hará un choque
 	
 	const danio
-	override method image() ="enemigo_Derecho.png"
+	const imagenes = ["auto_obs1.png", "auto_obs2.png"]
+	const number
+	override method image() = imagenes.get(number)
 	override method colision(jugador){
-		const sonidoChoque = game.sound("sonidoChoque.mp3")
+		game.sound("sonidoChoque.mp3").play()
 		jugador.vida(jugador.vida()-danio)
-		game.schedule(50, {sonidoChoque.play()})
-		if(jugador.vida()<0){
+		if(jugador.vida()<1){
 			const sonidoExplosion = game.sound("sonidoExplosion.mp3")
-			game.schedule(150, {sonidoExplosion.play()})
+			sonidoExplosion.play()
 			jugador.image("explosion.png")
 			game.removeTickEvent("SPAWN_ENEMIGO")
 			game.removeTickEvent("GENERAR")
 			game.removeTickEvent("Animacion Fondo")
-			game.say(jugador, "PERDISTE")
-			game.schedule(2000, {
-				game.stop()
+			game.schedule(1000, {
+				pantalla.terminarPartida("cartel_perdiste.png", "e27b7b")
 			})
 		}
 	}
