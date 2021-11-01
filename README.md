@@ -17,11 +17,11 @@ GRA Gran Robo Automotor
 
 ## Reglas de Juego / Instrucciones
 
-Se trata de un juego inspirado en el mitico GTA de la también mítica game boy advance. En el cual el personaje principal maneja un vehiculo (con la camara en vista superior) y debe ir esquivando otros vehiculos y recogiendo items de utilidad tales como dólares, armas y municion. El juego finaliza cuando el auto alcanza determinada cantidad de choques
+Se trata de un juego inspirado en el mitico GTA de la también mítica game boy advance. En el cual el personaje principal maneja un vehiculo (con la camara en vista superior) y debe ir esquivando otros vehiculos y recogiendo items de utilidad tales como dólares, armas y municion, estos dan puntaje(dependiendo de que item recoja cada jugador) los cuales se van sumando y se muestra a la hora de finalizado el juego. El juego finaliza cuando el auto choca 5 autos o si sobrevive a 90 segundos de juego. Se puede acelerar , relentizar. Los vehiculos pueden ir cambiando de carril. 
 
 
 ## Otros
 
-- Curso/Facultad
+- K2002/Utn frba
 - Versión de wollok
 - Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
