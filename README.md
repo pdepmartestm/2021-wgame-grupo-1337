@@ -9,7 +9,11 @@ GRA Gran Robo Automotor
 
 ## Capturas
 
-(agregar)
+![image](https://user-images.githubusercontent.com/69938352/139745593-dc4406e5-5d81-417c-9470-03899ebbaceb.png)
+![image](https://user-images.githubusercontent.com/69938352/139745603-51d1a41f-b3a1-4e86-be44-d681de4d2c5f.png)
+![image](https://user-images.githubusercontent.com/69938352/139745627-5e9a1202-1455-4157-a967-3f35a35cdb62.png)
+![image](https://user-images.githubusercontent.com/69938352/139745644-3905a529-e796-412a-87b5-a9f62b52acba.png)
+
 
 ## Reglas de Juego / Instrucciones
 
