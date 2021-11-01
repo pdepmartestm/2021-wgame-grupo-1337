@@ -12,6 +12,7 @@ import timer.*
 object pantalla{
 	
 	var property velocidad = 100
+	var property puntajeBaseVelocidad = 100
 	
 	method iniciar(){
 		game.title("GRA: Gran Robo Automotor")
@@ -29,10 +30,12 @@ object pantalla{
 		
 		keyboard.up().onPressDo {
 			velocidad = velocidad - 10
+			puntajeBaseVelocidad = puntajeBaseVelocidad + 10
 			self.nuevaVelocidadAnimacion()
 		}
 		keyboard.down().onPressDo {
 			velocidad = velocidad + 10
+			puntajeBaseVelocidad = puntajeBaseVelocidad - 10
 			self.nuevaVelocidadAnimacion()
 		}
 		
@@ -86,6 +89,11 @@ object pantalla{
 		//Manejo de colision con el auto
 		game.onCollideDo(autoJugador, {
 			entidad => entidad.colision(autoJugador)
+			if(autoJugador.puntos() > 500){
+				musicaFondo.stop()
+				self.terminarPartida("cartel_ganaste.png", "a2e27b")
+				game.sound("musicaVictoria.mp3").play()
+			}
 		})
 		
 		//visual de puntaje del auto
