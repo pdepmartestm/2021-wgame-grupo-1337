@@ -58,7 +58,8 @@ object pantalla{
 			const danio_imagen = [1, 2].anyOne()
 			const b = new AutoEnemigo(danio = danio_imagen, position = posicionSpawn, number = danio_imagen - 1)
 			game.addVisual(b)
-			b.irCayendo()	
+			b.irCayendo()
+			b.doblar()
 		})
 		
 		//Auto del jugador
