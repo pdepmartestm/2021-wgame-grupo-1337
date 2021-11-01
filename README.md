@@ -23,5 +23,5 @@ Se trata de un juego inspirado en el mitico GTA de la también mítica game boy 
 ## Otros
 
 - K2002/Utn frba
-- Versión de wollok
+- Versión 3.0.0
 - Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
