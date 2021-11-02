@@ -12,7 +12,6 @@ import timer.*
 object pantalla{
 	
 	var property velocidad = 100
-	var property puntajeBaseVelocidad = 100
 	
 	method iniciar(){
 		game.title("GRA: Gran Robo Automotor")
@@ -30,61 +29,20 @@ object pantalla{
 		
 		keyboard.up().onPressDo {
 			velocidad = velocidad - 10
-			puntajeBaseVelocidad = puntajeBaseVelocidad + 10
 			self.nuevaVelocidadAnimacion()
 		}
 		keyboard.down().onPressDo {
 			velocidad = velocidad + 10
-			puntajeBaseVelocidad = puntajeBaseVelocidad - 10
 			self.nuevaVelocidadAnimacion()
 		}
 		
-		//Spawn de items
-		game.onTick(4000, "GENERAR", {
-			const random = (1..6).anyOne()
-			const horizontal = (0..5).anyOne()
-			const posicionSpawn = game.at(horizontal,8)
-			var b
-			if(random == 1) b = new Bate(position = posicionSpawn)
-			if(random == 2) b = new Espada(position = posicionSpawn)
-			if(random == 3) b = new Pistola(position = posicionSpawn)
-			if(random == 4) b = new Ametralladora(position = posicionSpawn)
-			if(random == 5) b = new Llave(position = posicionSpawn)
-			if(random == 6) b = new Dinero(position = posicionSpawn)
-			game.addVisual(b)
-			b.irCayendo()	
-		})
-		//Spawn de enemigos
-		game.onTick(1500, "SPAWN_ENEMIGO", {
-			const horizontal = (0..5).anyOne()
-			const posicionSpawn = game.at(horizontal,8)
-			const danio_imagen = [1, 2].anyOne()
-			const b = new AutoEnemigo(danio = danio_imagen, position = posicionSpawn, number = danio_imagen - 1)
-			game.addVisual(b)
-			b.irCayendo()
-			b.doblar()
-		})
+		self.spawnDeItems()
+		self.spawnDeEnemigos()
 		
 		//Auto del jugador
 		game.addVisual(autoJugador)
-		keyboard.left().onPressDo { 
-			if(autoJugador.position().x()==0){//no hacer nada ya que se pasa de la pantalla
-			}
-			else{
-				autoJugador.move(autoJugador.position().left(1))
-				autoJugador.image("Auto_Izquierda.png")
-				autoJugador.enderezar()
-			}
-		}
-		keyboard.right().onPressDo { 
-			if(autoJugador.position().x()>4){//no hacer nada ya que se pasa de la pantalla
-			}
-			else{
-				autoJugador.move(autoJugador.position().right(1))
-				autoJugador.image("Auto_Derecha.png")
-				autoJugador.enderezar()
-			}
-		}
+		keyboard.left().onPressDo { autoJugador.izquierda()	}
+		keyboard.right().onPressDo{ autoJugador.derecha()	}
 		
 		//Manejo de colision con el auto
 		game.onCollideDo(autoJugador, {
@@ -125,6 +83,42 @@ object pantalla{
 		game.addVisual(puntaje)
 	}
 	
+	method puntajeBaseVelocidad() = 200 - velocidad
+	
+	method items(posicionSpawn) = [new Bate(position = posicionSpawn), new Espada(position = posicionSpawn), new Ametralladora(position = posicionSpawn), new Llave(position = posicionSpawn), new Dinero(position = posicionSpawn)]
+	
+	method spawnDeItems(){
+		game.onTick(4000, "GENERAR", {
+			const horizontal = (0..5).anyOne()
+			const posicionSpawn = game.at(horizontal,8)
+			const item = self.items(posicionSpawn).anyOne()
+			game.addVisual(item)
+			item.irCayendo()	
+		})
+	}
+	
+	method spawnDeEnemigos(){
+		game.onTick(1500, "SPAWN_ENEMIGO", {
+			const horizontal = (0..5).anyOne()
+			const posicionSpawn = game.at(horizontal,8)
+			const danio_imagen = [1, 2].anyOne()
+			const b = new AutoEnemigo(danio = danio_imagen, position = posicionSpawn, number = danio_imagen - 1)
+			game.addVisual(b)
+			b.irCayendo()
+			b.doblar()
+		})
+	}
+	
+	method perder(){
+		const sonidoExplosion = game.sound("sonidoExplosion.mp3")
+		sonidoExplosion.play()
+		game.removeTickEvent("SPAWN_ENEMIGO")
+		game.removeTickEvent("GENERAR")
+		game.removeTickEvent("Animacion Fondo")
+		game.schedule(1000, {
+			self.terminarPartida("cartel_perdiste.png", "e27b7b")
+		})
+	}
 
 }
 

@@ -8,7 +8,6 @@ import Pantalla.*
 //Pistola: 200 puntos
 //Ametralladora: 500 puntos
 class Arma inherits Entidad{
-	var property sprite = []
 	method puntaje()
 	override method colision(autoJugador){
 		autoJugador.puntos(autoJugador.puntos() + self.puntaje())
